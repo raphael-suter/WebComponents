@@ -69,19 +69,11 @@ class Modal extends HTMLElement {
     const okButton = this.shadowRoot.querySelector('#ok');
 
     cancelButton.addEventListener('click', this.hide.bind(this));
+    okButton.addEventListener('click', () => {
+      this.hide();
+      this.dispatchEvent(new Event('success'));
+    });
   }
-
-  /*attributeChangedCallback(name, oldValue, newValue) {
-    if (name === 'opened') {
-      if (this.hasAttribute('opened')) {
-        this.shadowRoot.querySelector('.background').style.display = 'block';
-      }
-    }
-  }
-
-  static get observedAttributes() {
-    return ['opened'];
-  }*/
 
   open() {
     this.setAttribute('opened', '');
