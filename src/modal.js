@@ -1,29 +1,30 @@
 import { css, html, LitElement } from 'lit-element';
 
 class Modal extends LitElement {
+  static get properties() {
+    return {
+      isVisible: { type: Boolean }
+    };
+  }
+
   static get styles() {
     return css`
-      .background {
+      div {
         position: fixed;
         top: 0;
         left: 0;
-        width: 100%;
-        height: 100vh;
+        right: 0;
+        bottom: 0;
         background: rgba(0, 0, 0, 0.75);
-        display: none;
       }
 
-      :host([opened]) .background {
-        display: block;
-      }
-
-      .modal {
-        width: 50%;
-        margin: 100px auto;
-        background: white;
+      article {
         display: flex;
         flex-direction: column;
         justify-content: space-between;
+        width: 50%;
+        margin: 100px auto;
+        background: white;
       }
 
       ::slotted(h1) {
@@ -32,48 +33,55 @@ class Modal extends LitElement {
         border-bottom: 1px solid #ccc;
       }
 
-      .main {
+      .modal__content {
         margin: 0 1rem;
       }
 
-      .actions {
+      .modal__actions {
         display: flex;
         padding: 1rem;
         justify-content: end;
         border-top: 1px solid #ccc;
       }
 
-      .actions button {
+      button {
         margin-left: 1rem;
       }
     `;
   }
 
+  constructor() {
+    super();
+    this.isVisible = false;
+  }
+
   render() {
     return html`
-      <div class='background'>
-        <div class='modal'>
-          <header>
-            <slot name='title'></slot>
-          </header>
-          <section class='main'>
-            <slot></slot>
-          </section>
-          <section class='actions'>
-            <button @click="${this.hide}">cancel</button>
-            <button @click="${this.confirm}">ok</button>
-          </section>
-        </div>
-      </div>
+      ${this.isVisible ? html`
+        <div>
+          <article>
+            <header>
+              <slot name='title'></slot>
+            </header>
+            <section class='modal__content'>
+              <slot></slot>
+            </section>
+            <section class='modal__actions'>
+              <button @click="${this.hide}">cancel</button>
+              <button @click="${this.confirm}">ok</button>
+            </section>
+          </article>
+        </div>` : ``
+      }
     `;
   }
 
-  open() {
-    this.setAttribute('opened', '');
+  show() {
+    this.isVisible = true;
   }
 
   hide() {
-    this.removeAttribute('opened');
+    this.isVisible = false;
   }
 
   confirm() {
