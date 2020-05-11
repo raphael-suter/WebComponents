@@ -5,24 +5,52 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WebComponents</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: darkseagreen;
+        }
+    </style>
 </head>
 
 <body>
-    <my-modal>
-        <h1 slot='title'>Please confirm</h1>
-        <p>With your confirmation you agree to pay the full amount!</p>
-    </my-modal>
-    <p>Please confirm your choice.</p>
-    <button>OK</button>
+    <my-form>
+        <h1>Anmelden</h1>
+        <my-textfield placeholder="Vorname" required></my-textfield>
+        <my-textfield placeholder="Nachname" required></my-textfield>
+        <my-textfield placeholder="Strasse"></my-textfield>
+        <my-textfield placeholder="Hausnummer" numeric></my-textfield>
+        <my-textfield placeholder="PLZ" numeric></my-textfield>
+        <my-textfield placeholder="Ort"></my-textfield>
+        <my-checkbox required>Ich bin schon gross und vier.</my-checkbox>
+        <my-button>ok</my-button>
+    </my-form>
     <script>
-        const button = document.querySelector('button');
-        const modal = document.querySelector('my-modal');
+        const form = document.querySelector('my-form');
+        const textFields = form.querySelectorAll('my-textfield');
+        const checkBoxes = form.querySelectorAll('my-checkbox');
+        const button = document.querySelector('my-button');
 
-        button.addEventListener('click', () => {
-            modal.show();
+        button.addEventListener('onClick', () => {
+            let isValid = true;
+
+            const validate = (inputElement) => {
+                if (!inputElement.isValid()) {
+                    isValid = false;
+                }
+            };
+
+            textFields.forEach(textField => validate(textField));
+            checkBoxes.forEach(checkBox => validate(checkBox));
+
+            if (isValid) {
+                alert('Formular kann abgeschickt werden.');
+            }
         });
-
-        modal.addEventListener('success', () => alert('Dialog wurde geschlossen.'));
     </script>
 </body>
 

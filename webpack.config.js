@@ -2,7 +2,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
 
 module.exports = {
-  entry: './src/modal.js',
+  entry: './src/components/index.js',
   module: {
     rules: [
       {
