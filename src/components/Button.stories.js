@@ -1,9 +1,15 @@
+import { text, withKnobs } from "@storybook/addon-knobs";
 import './Button';
 
 export default {
-  title: 'Button'
+  title: 'Button',
+  decorators: [withKnobs]
 };
 
 export const Button = () => {
-  return "<my-button></my-button>";
+  return `
+    <my-button>
+      ${text('text', 'ok')}
+    </my-button>
+  `;
 };

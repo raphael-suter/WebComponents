@@ -1,9 +1,15 @@
+import { text, withKnobs } from '@storybook/addon-knobs';
 import './Form';
 
 export default {
-  title: 'Form'
+  title: 'Form',
+  decorators: [withKnobs]
 };
 
 export const Form = () => {
-  return "<my-form></my-from>";
+  return `
+    <my-form>
+      <h1>${text('title', 'Anmelden')}</h1>
+    </my-from>
+  `;
 };

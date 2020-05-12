@@ -1,10 +1,12 @@
+import { withKnobs } from '@storybook/addon-knobs';
 import './index';
 
 export default {
-  title: 'Example'
+  title: 'Example',
+  decorators: [withKnobs]
 };
 
-export const Form = () => {
+export const Example = () => {
   return `
     <my-form>
       <h1>Anmelden</h1>
