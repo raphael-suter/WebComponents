@@ -5,9 +5,8 @@ class Form extends LitElement {
     return css`
       form {
         width: 350px;
-        padding: 1rem;
-        border-radius: 2px;
-        box-shadow: 0 0 4px rgba(0, 0, 0, 0.25);
+        padding: 1.5rem;
+        box-shadow: 0 0 8px rgba(0, 0, 0, 0.25);
         background: white;
       }
 

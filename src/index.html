@@ -12,46 +12,96 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            background: darkseagreen;
+            background: #ccc;
+        }
+
+        axa-heading {
+            text-align: center;
+        }
+
+        axa-input-text {
+            display: block;
+            margin-bottom: 1.5rem;
+        }
+
+        axa-checkbox {
+            text-align: center;
+            margin: 2rem;
+        }
+
+        axa-button {
+            width: 100%;
         }
     </style>
 </head>
 
 <body>
     <my-form>
-        <h1>Anmelden</h1>
-        <my-textfield placeholder="Vorname" required></my-textfield>
-        <my-textfield placeholder="Nachname" required></my-textfield>
-        <my-textfield placeholder="Strasse"></my-textfield>
-        <my-textfield placeholder="Hausnummer" numeric></my-textfield>
-        <my-textfield placeholder="PLZ" numeric></my-textfield>
-        <my-textfield placeholder="Ort"></my-textfield>
-        <my-checkbox required>Ich bin schon gross und vier.</my-checkbox>
-        <my-button>ok</my-button>
+        <axa-heading variant="secondary" rank="3">Anmelden</axa-heading>
+        <axa-input-text placeholder="Vorname" required></axa-input-text>
+        <axa-input-text placeholder="Nachname" required></axa-input-text>
+        <axa-input-text placeholder="Strasse"></axa-input-text>
+        <axa-input-text placeholder="Hausnummer" numeric></axa-input-text>
+        <axa-input-text placeholder="PLZ" numeric></axa-input-text>
+        <axa-input-text placeholder="Ort"></axa-input-text>
+        <axa-checkbox label="Ich bin schon gross und vier." required></axa-checkbox>
+        <axa-button>ok</axa-button>
     </my-form>
     <script>
         const form = document.querySelector('my-form');
-        const textFields = form.querySelectorAll('my-textfield');
-        const checkBoxes = form.querySelectorAll('my-checkbox');
-        const button = document.querySelector('my-button');
+        const textFields = form.querySelectorAll('axa-input-text');
+        const checkBoxes = form.querySelectorAll('axa-checkbox');
+        const button = document.querySelector('axa-button');
 
-        button.addEventListener('onClick', () => {
+        button.addEventListener('click', () => {
             let isValid = true;
 
-            const validate = (inputElement) => {
-                if (!inputElement.isValid()) {
-                    isValid = false;
-                }
-            };
+            textFields.forEach(textField => {
+                if (textField.hasAttribute('required')) {
+                    if (textField.value === '') {
+                        textField.setAttribute('error', 'Bitte ausfüllen.');
+                        textField.setAttribute('invalid', '');
 
-            textFields.forEach(textField => validate(textField));
-            checkBoxes.forEach(checkBox => validate(checkBox));
+                        isValid = false;
+                    } else {
+                        textField.removeAttribute('error');
+                        textField.removeAttribute('invalid');
+                    }
+                }
+
+                if (textField.hasAttribute('numeric')) {
+                    if (isNaN(textField.value)) {
+                        textField.setAttribute('error', 'Muss eine Zahl sein.');
+                        textField.setAttribute('invalid', '');
+
+                        isValid = false;
+                    } else {
+                        textField.removeAttribute('error');
+                        textField.removeAttribute('invalid');
+                    }
+                }
+            });
+
+            checkBoxes.forEach(checkBox => {
+                if (checkBox.hasAttribute('required')) {
+                    if (checkBox.hasAttribute('checked')) {
+                        checkBox.removeAttribute('error');
+                    } else {
+                        checkBox.setAttribute('error', 'Muss angewählt werden.');
+                        isValid = false;
+                    }
+                }
+            });
 
             if (isValid) {
                 alert('Formular kann abgeschickt werden.');
             }
         });
     </script>
+    <script src="node_modules/@axa-ch/heading/dist/index.js"></script>
+    <script src="node_modules/@axa-ch/input-text/dist/index.js"></script>
+    <script src="node_modules/@axa-ch/checkbox/dist/index.js"></script>
+    <script src="node_modules/@axa-ch/button/dist/index.js"></script>
 </body>
 
 </html>

@@ -4,6 +4,10 @@
   "description": "",
   "main": "modal.js",
   "dependencies": {
+    "@axa-ch/button": "^4.1.1",
+    "@axa-ch/checkbox": "^4.0.1",
+    "@axa-ch/heading": "^2.0.2",
+    "@axa-ch/input-text": "^3.0.14",
     "@storybook/addon-knobs": "^5.3.18"
   },
   "devDependencies": {
