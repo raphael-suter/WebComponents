@@ -1,107 +1,107 @@
 <!DOCTYPE html>
 <html lang="de">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>WebComponents</title>
     <style>
-        body {
-            margin: 0;
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background: #ccc;
-        }
+      body {
+        margin: 0;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: #ccc;
+      }
 
-        axa-heading {
-            text-align: center;
-        }
+      axa-heading {
+        text-align: center;
+      }
 
-        axa-input-text {
-            display: block;
-            margin-bottom: 1.5rem;
-        }
+      axa-input-text {
+        display: block;
+        margin-bottom: 1.5rem;
+      }
 
-        axa-checkbox {
-            text-align: center;
-            margin: 2rem;
-        }
+      axa-checkbox {
+        text-align: center;
+        margin: 2rem;
+      }
 
-        axa-button {
-            width: 100%;
-        }
+      axa-button {
+        width: 100%;
+      }
+
+      label {
+        display: flex;
+        margin: 2rem 0;
+        justify-content: space-between;
+        align-items: center;
+      }
     </style>
-</head>
+  </head>
 
-<body>
+  <body>
     <my-form>
-        <axa-heading variant="secondary" rank="3">Anmelden</axa-heading>
-        <axa-input-text placeholder="Vorname" required></axa-input-text>
-        <axa-input-text placeholder="Nachname" required></axa-input-text>
-        <axa-input-text placeholder="Strasse"></axa-input-text>
-        <axa-input-text placeholder="Hausnummer" numeric></axa-input-text>
-        <axa-input-text placeholder="PLZ" numeric></axa-input-text>
-        <axa-input-text placeholder="Ort"></axa-input-text>
-        <axa-checkbox label="Ich bin schon gross und vier." required></axa-checkbox>
-        <axa-button>ok</axa-button>
+      <axa-heading variant="secondary" rank="3">Anmelden</axa-heading>
+      <axa-input-text placeholder="Vorname" required></axa-input-text>
+      <axa-input-text placeholder="Nachname" required></axa-input-text>
+      <axa-input-text placeholder="Strasse"></axa-input-text>
+      <axa-input-text placeholder="Hausnummer" numeric></axa-input-text>
+      <axa-input-text placeholder="PLZ" numeric></axa-input-text>
+      <axa-input-text placeholder="Ort"></axa-input-text>
+      <label>
+        Ich bin schon gross und vier.
+        <axa-toggle-switch required></axa-toggle-switch>
+      </label>
+      <axa-button>ok</axa-button>
     </my-form>
     <script>
-        const form = document.querySelector('my-form');
-        const textFields = form.querySelectorAll('axa-input-text');
-        const checkBoxes = form.querySelectorAll('axa-checkbox');
-        const button = document.querySelector('axa-button');
+      const form = document.querySelector("my-form");
+      const textFields = form.querySelectorAll("axa-input-text");
+      const toggleSwitch = form.querySelector("axa-toggle-switch");
+      const button = document.querySelector("axa-button");
 
-        button.addEventListener('click', () => {
-            let isValid = true;
+      button.addEventListener("click", () => {
+        let isValid = true;
 
-            textFields.forEach(textField => {
-                if (textField.hasAttribute('required')) {
-                    if (textField.value === '') {
-                        textField.setAttribute('error', 'Bitte ausfüllen.');
-                        textField.setAttribute('invalid', '');
+        textFields.forEach((textField) => {
+          if (textField.hasAttribute("required")) {
+            if (textField.value === "") {
+              textField.setAttribute("error", "Bitte ausfüllen.");
+              textField.setAttribute("invalid", "");
 
-                        isValid = false;
-                    } else {
-                        textField.removeAttribute('error');
-                        textField.removeAttribute('invalid');
-                    }
-                }
-
-                if (textField.hasAttribute('numeric')) {
-                    if (isNaN(textField.value)) {
-                        textField.setAttribute('error', 'Muss eine Zahl sein.');
-                        textField.setAttribute('invalid', '');
-
-                        isValid = false;
-                    } else {
-                        textField.removeAttribute('error');
-                        textField.removeAttribute('invalid');
-                    }
-                }
-            });
-
-            checkBoxes.forEach(checkBox => {
-                if (checkBox.hasAttribute('required')) {
-                    if (checkBox.hasAttribute('checked')) {
-                        checkBox.removeAttribute('error');
-                    } else {
-                        checkBox.setAttribute('error', 'Muss angewählt werden.');
-                        isValid = false;
-                    }
-                }
-            });
-
-            if (isValid) {
-                alert('Formular kann abgeschickt werden.');
+              isValid = false;
+            } else {
+              textField.removeAttribute("error");
+              textField.removeAttribute("invalid");
             }
+          }
+
+          if (textField.hasAttribute("numeric")) {
+            if (isNaN(textField.value)) {
+              textField.setAttribute("error", "Muss eine Zahl sein.");
+              textField.setAttribute("invalid", "");
+
+              isValid = false;
+            } else {
+              textField.removeAttribute("error");
+              textField.removeAttribute("invalid");
+            }
+          }
         });
+
+        if (isValid) {
+          alert("Formular kann abgeschickt werden.");
+        }
+      });
+
+      toggleSwitch.addEventListener("change", ({ detail }) => alert(detail));
     </script>
+    <script src="node_modules/@axa-ch/toggle-switch/dist/index.js"></script>
     <script src="node_modules/@axa-ch/heading/dist/index.js"></script>
     <script src="node_modules/@axa-ch/input-text/dist/index.js"></script>
     <script src="node_modules/@axa-ch/checkbox/dist/index.js"></script>
     <script src="node_modules/@axa-ch/button/dist/index.js"></script>
-</body>
-
+  </body>
 </html>
