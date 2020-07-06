@@ -6,9 +6,11 @@
   "dependencies": {
     "@axa-ch/button": "^4.1.1",
     "@axa-ch/checkbox": "^4.0.1",
+    "@axa-ch/container": "^3.0.2",
     "@axa-ch/heading": "^2.0.2",
     "@axa-ch/input-text": "^3.0.14",
     "@axa-ch/patterns-library-polyfill": "^1.5.4",
+    "@axa-ch/table-sortable": "^3.1.0",
     "@axa-ch/toggle-switch": "^1.0.0-beta.0",
     "@storybook/addon-knobs": "^5.3.18"
   },
