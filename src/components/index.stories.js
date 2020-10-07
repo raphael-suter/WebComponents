@@ -1,9 +1,9 @@
-import { withKnobs } from '@storybook/addon-knobs';
-import './index';
+import { withKnobs } from "@storybook/addon-knobs";
+import "./index";
 
 export default {
-  title: 'Example',
-  decorators: [withKnobs]
+  title: "Examples/Form",
+  decorators: [withKnobs],
 };
 
 export const Example = () => {

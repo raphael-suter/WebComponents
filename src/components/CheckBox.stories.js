@@ -1,18 +1,18 @@
 import { select, text, withKnobs } from "@storybook/addon-knobs";
-import './CheckBox';
+import "./CheckBox";
 
 export default {
-  title: 'CheckBox',
-  decorators: [withKnobs]
+  title: "Components/CheckBox",
+  decorators: [withKnobs],
 };
 
 export const CheckBox = () => {
   return `
     <my-checkbox 
-      ${select('checked', { yes: 'checked', no: '' }, '')}
-      ${select('required', { yes: 'required', no: '' }, '')}
+      ${select("checked", { yes: "checked", no: "" }, "")}
+      ${select("required", { yes: "required", no: "" }, "")}
     >
-      ${text('text', 'Ich bin schon gross und vier.')}
+      ${text("text", "Ich bin schon gross und vier.")}
     </my-checkbox>
   `;
 };

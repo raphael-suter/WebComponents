@@ -20,9 +20,4 @@ module.exports = {
       template: "./src/index.html",
     }),
   ],
-  devServer: {
-    host: "192.168.178.52",
-    port: 8080,
-    disableHostCheck: true,
-  },
 };
